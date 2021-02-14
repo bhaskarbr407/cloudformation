@@ -92,10 +92,13 @@ Resources:
           Value: webserver security group
       VpcId: !Ref VPC
 
-  ElasticIp:
+  IPAddress:
     Type: AWS::EC2::EIP
-    Properties: 
-      InstanceId: !Ref WebServerInstance
+  IPAssoc:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      InstanceId: !Ref 'WebServerInstance'
+      EIP: !Ref 'IPAddress'
 
   WebServerInstance:
     Type: AWS::EC2::Instance
